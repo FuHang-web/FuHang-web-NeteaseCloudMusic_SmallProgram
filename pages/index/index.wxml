@@ -1,7 +1,6 @@
 <view class="indexContainer">
 	<!-- 轮播图区域 -->
-	<swiper class="banners" indicator-dots indicator-color="ivory" indicator-active-color='#d43c33' autoplay="true"
-		circular="true">
+	<swiper class="banners" indicator-dots indicator-color="ivory" indicator-active-color='#d43c33' autoplay circular>
 		<swiper-item wx:for="{{bannerList}}" wx:key="bannerId">
 			<image src="{{item.pic}}"></image>
 		</swiper-item>
@@ -73,23 +72,18 @@
 		<!-- 内容区域 -->
 		<view class="topListSwiperBox">
 			<swiper class="topListSwiper" next-margin="40rpx">
-				<swiper-item wx:for="{{playListNameList}}" wx:key="id">
+				<swiper-item wx:for="{{playListNameList}}" wx:key="id" wx:for-item="playListItem">
 					<view class="swiperItem">
-						<view class="title">{{item.name}}</view>
-						<view class="musicItem">
-							<image src="/static/images/1.jpg"></image>
-							<text class="count">1</text>
-							<text class="musicName">光辉岁月</text>
-						</view>
-						<view class="musicItem">
-							<image src="/static/images/1.jpg"></image>
-							<text class="count">2</text>
-							<text class="musicName">光辉岁月</text>
-						</view>
-						<view class="musicItem">
-							<image src="/static/images/1.jpg"></image>
-							<text class="count">3</text>
-							<text class="musicName">光辉岁月</text>
+						<image src="{{playListItem.tracks[0].al.picUrl}}" class="swiperItemBg"></image>
+						<view class="title">{{playListItem.name}}</view>
+						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem">
+							<image src="{{tracksItem.al.picUrl}}"></image>
+							<text class="count">{{index+1}}</text>
+							<view class="names">
+								<text class="musicName">{{tracksItem.name}}</text>
+								<text class="authorName"> - {{tracksItem.ar[0].name}}</text>
+							</view>
+							<text class="iconFont">新</text>
 						</view>
 					</view>
 				</swiper-item>

@@ -2,6 +2,7 @@
 // import { log } from 'console'
 // import { log } from 'console'
 import request from '../../utils/request'
+import tools from '../../utils/tools'
 Page({
 
   /**
@@ -53,13 +54,26 @@ Page({
 
         // 获取排行榜的歌单数据
         let topListData = await request('/toplist')
-        topListData.list.sort(function (a, b) {
-          return b.playCount - a.playCount
-        })
-        console.log(topListData);
-        
+        const a = tools.getRandomArrayElements(topListData.list, 5)
+        let newTopList = []
+        for (let i = 0, len = a.length; i < len; i++) {
+          console.log(a[i].id);
+          const {
+            playlist: newTop
+          } = await request('/playlist/detail', {
+            id: a[i].id
+          })
+          newTop.tracks.splice(3, newTop.tracks.length - 3)
+          console.log(newTop.tracks.length);
+          newTopList.push(newTop)
+        }
+        console.log(newTopList);
+        // topListData.list.sort(function (a, b) {
+        //   return b.playCount - a.playCount
+        // })
+        // console.log(topListData);
         this.setData({
-          playListNameList: topListData.list.slice(0, 5)
+          playListNameList: newTopList
         })
 
       },

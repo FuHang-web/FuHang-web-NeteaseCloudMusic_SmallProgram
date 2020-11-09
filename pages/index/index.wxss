@@ -49,9 +49,10 @@
 }
 
 /* 发现好歌单 内容区域 */
-.recommendContent{
+.recommendContent {
     padding-left: 20rpx;
 }
+
 .recommendScroll {
     display: flex;
     margin-top: 20rpx;
@@ -85,25 +86,41 @@
 .topList {
     /* padding: 20rpx; */
 }
-.topListSwiperBox{
+
+.topListSwiperBox {
     padding-left: 20rpx;
 }
+
 .topList .topListSwiper {
     height: 468rpx;
     width: 100%;
     /* border-radius: 18rpx; */
 }
-.swiperItem{
+
+.swiperItem {
     width: 96%;
-    background-color: #ccc;
+    background-color: rgba(0, 0, 0, .6);
     padding: 0 20rpx;
     box-sizing: border-box;
     border-radius: 18rpx;
     height: 100%;
+    position: relative;
+    overflow: hidden;
 }
+
+.swiperItem .swiperItemBg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: .6;
+    z-index: -1;
+}
+
 .swiperItem .title {
     font-size: 36rpx;
     padding: 30rpx 0;
+    color: #fff;
 }
 
 .swiperItem .musicItem {
@@ -121,4 +138,29 @@
 .swiperItem .musicItem .count {
     width: 100rpx;
     text-align: center;
+    color: #fff;
+    font-size: 28rpx;
+}
+
+.swiperItem .musicItem .names {
+    width: 360rpx;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.swiperItem .musicItem .names .musicName {
+    color: #fff;
+    font-size: 28rpx;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.swiperItem .musicItem .names .authorName {
+    color: #ccc;
+    font-size: 24rpx;
+}
+
+.swiperItem .musicItem .iconFont {
+    color: #fff;
+    font-size: 24rpx;
+    margin-left: auto;
 }
