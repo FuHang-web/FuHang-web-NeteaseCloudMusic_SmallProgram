@@ -1,0 +1,21 @@
+ .header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 20rpx;
+ }
+
+ .header .header-left {
+   font-size: 36rpx;
+   letter-spacing: 4rpx;
+   font-family: 微软雅黑;
+ }
+
+ .header .header-right {
+   padding: 12rpx 30rpx;
+   border: 1rpx solid #bbb;
+   border-radius: 30rpx;
+   font-size: 24rpx;
+   letter-spacing: 2rpx;
+   color: #333;
+ }

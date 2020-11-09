@@ -1,0 +1,124 @@
+/* pages/index/index.wxss */
+.indexContainer {}
+
+.banners {
+    width: 100%;
+    height: 300rpx;
+}
+
+.banners image {
+    width: 100%;
+    height: 100%;
+}
+
+/* 5个图标导航区域 */
+.navContainer {
+    display: flex;
+}
+
+.navItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+}
+
+.navItem .iconfont {
+    width: 100rpx;
+    height: 100rpx;
+    line-height: 100rpx;
+    text-align: center;
+    border-radius: 50%;
+    background-color: rgb(240, 19, 19);
+    font-size: 48rpx;
+    color: #fff;
+    margin: 40rpx 0;
+}
+
+.navItem text {
+    font-size: 26rpx;
+}
+
+.navItem:nth-child(1) :nth-child(1) {
+    font-size: 80rpx;
+}
+
+/* 发现好歌单 */
+.recommendContainer {
+    /* padding: 28rpx; */
+}
+
+/* 发现好歌单 内容区域 */
+.recommendContent{
+    padding-left: 20rpx;
+}
+.recommendScroll {
+    display: flex;
+    margin-top: 20rpx;
+    height: 300rpx;
+}
+
+.recommendScroll .scrollItem {
+    width: 200rpx;
+}
+
+.recommendScroll .scrollItem:not(:last-child) {
+    margin-right: 20rpx;
+}
+
+.recommendScroll .scrollItem image {
+    width: 200rpx;
+    height: 200rpx;
+    border-radius: 10rpx;
+}
+
+.recommendScroll .scrollItem text {
+    font-size: 24rpx;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+/* 排行榜 */
+.topList {
+    /* padding: 20rpx; */
+}
+.topListSwiperBox{
+    padding-left: 20rpx;
+}
+.topList .topListSwiper {
+    height: 468rpx;
+    width: 100%;
+    /* border-radius: 18rpx; */
+}
+.swiperItem{
+    width: 96%;
+    background-color: #ccc;
+    padding: 0 20rpx;
+    box-sizing: border-box;
+    border-radius: 18rpx;
+    height: 100%;
+}
+.swiperItem .title {
+    font-size: 36rpx;
+    padding: 30rpx 0;
+}
+
+.swiperItem .musicItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20rpx;
+}
+
+.swiperItem .musicItem image {
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 10rpx;
+}
+
+.swiperItem .musicItem .count {
+    width: 100rpx;
+    text-align: center;
+}
