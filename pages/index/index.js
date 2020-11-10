@@ -12,7 +12,8 @@ Page({
     bannerList: [], // 轮播图的数据
     recommendHeader: '',
     recommendList: [], // 推荐歌单的数据
-    playListNameList: '' // 热门歌单名字
+    playListNameList: '', // 热门歌单名字
+    navIconList: [], // 图标列表
   },
 
   test(e) {
@@ -34,6 +35,15 @@ Page({
         if (result.windowWidth > 750) {
           isSystem = 3
         }
+        // 首页-图标列表
+        const {
+          data: navIconListData
+        } = await request('/homepage/dragon/ball')
+        this.setData({
+          navIconList: navIconListData
+        })
+        console.log(navIconListData);
+
         // 获取轮播图页面数据
         let bannerListData = await request('/banner', {
           type: isSystem

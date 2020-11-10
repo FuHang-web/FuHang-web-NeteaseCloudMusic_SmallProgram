@@ -7,12 +7,15 @@
 	</swiper>
 
 	<!-- 5个图标导航区域 -->
-	<swiper class="navContainer" display-multiple-items="5">
-		<swiper-item class="navItem">
-			<text class="iconfont icon-meirituijian"></text>
-			<text>每日推荐</text>
+	<swiper class="navContainer" display-multiple-items="5" next-margin="50rpx">
+		<swiper-item class="navItem" wx:for="{{navIconList}}" wx:key="id" wx:for-item="iconItem">
+			<view class="iconBackground">
+				<image src="{{iconItem.iconUrl}}"></image>
+			</view>
+			<!-- <text class="iconfont icon-meirituijian"></text> -->
+			<text class="iconName">{{iconItem.name}}</text>
 		</swiper-item>
-		<swiper-item class="navItem">
+		<!-- <swiper-item class="navItem">
 			<text class="iconfont icon-FM"></text>
 			<text>私人FM</text>
 		</swiper-item>
@@ -43,7 +46,7 @@
 		<swiper-item class="navItem">
 			<text class="iconfont icon-icon"></text>
 			<text>游戏专区</text>
-		</swiper-item>
+		</swiper-item> -->
 	</swiper>
 
 	<!-- 推荐歌曲区域 -->
