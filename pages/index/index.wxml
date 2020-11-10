@@ -9,7 +9,7 @@
 	<!-- 5个图标导航区域 -->
 	<swiper class="navContainer" display-multiple-items="5" next-margin="50rpx">
 		<swiper-item class="navItem" wx:for="{{navIconList}}" wx:key="id" wx:for-item="iconItem">
-			<view class="iconBackground">
+			<view class="iconBackground {{iconItem.className}}">
 				<image src="{{iconItem.iconUrl}}"></image>
 			</view>
 			<!-- <text class="iconfont icon-meirituijian"></text> -->

@@ -39,6 +39,20 @@ Page({
         const {
           data: navIconListData
         } = await request('/homepage/dragon/ball')
+        navIconListData.splice(1, 0, {
+          id: -10,
+          name: '私人FM',
+          className: 'iconfont icon-FM'
+        })
+        navIconListData.push({
+          id: -11,
+          name: '唱聊',
+          className: 'iconfont icon-changge'
+        }, {
+          id: -12,
+          name: '游戏专区',
+          className: 'iconfont icon-icon'
+        })
         this.setData({
           navIconList: navIconListData
         })
