@@ -18,11 +18,16 @@ function getRandomArrayElements(arr, count) {
 const date = new Date()
 // 获取当前月中的一天 (1 ~ 31)
 const mGetDate = function () {
-  const monthDay = date.getUTCDate()
+  const monthDay = date.getDate()
   return monthDay
 }
-
+// 获取当天的时间戳
+const getTimeStamp = function () {
+  const timeStamp = date.getTime()
+  return timeStamp
+}
 export default {
   getRandomArrayElements,
   mGetDate,
+  getTimeStamp,
 }

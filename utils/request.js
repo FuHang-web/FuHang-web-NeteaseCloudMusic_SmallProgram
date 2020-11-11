@@ -26,6 +26,10 @@ export default (url, data = {}, method = 'GET') => {
             url: config.host + url,
             data,
             method,
+            header:{
+                'content-type': 'application/x-www-form-urlencoded',
+                'cookie':wx.getStorageSync('cookie')
+            },
             success: res => {
                 resolve(res.data)  // resolve修改promise的状态为成功状态，resolved
             },

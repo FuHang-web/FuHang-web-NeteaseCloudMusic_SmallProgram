@@ -13,6 +13,7 @@ Page({
     playListNameList: '', // 热门歌单名字
     navIconList: [], // 图标列表
     monthDay: '', // 今天是每个月中的第几天
+    musicCalendarList: [], // 音乐日历数据
   },
 
   test(e) {
@@ -34,6 +35,10 @@ Page({
         if (result.windowWidth > 750) {
           isSystem = 3
         }
+
+
+
+
         // 首页-图标列表
         const {
           data: navIconListData
@@ -52,6 +57,7 @@ Page({
           name: '游戏专区',
           className: 'iconfont icon-youxi'
         })
+
         this.setData({
           navIconList: navIconListData,
           monthDay: tools.mGetDate()
@@ -68,35 +74,61 @@ Page({
 
         // 获取推荐歌单的数据
         let recommendHeaderList = ['你的歌单精选站', '发现好歌单', '懂你的精选歌单', '人气歌单推荐']
-        let {result:recommendListData} = await request('/personalized', {
+        let {
+          result: recommendListData
+        } = await request('/personalized', {
           limit: 10
         })
         console.log(recommendListData);
-        
+
         this.setData({
           recommendHeader: recommendHeaderList[Math.floor(Math.random() * recommendHeaderList.length)],
           recommendList: recommendListData,
         })
+        // const login = await request('/login/cellphone', {
+        //   phone: 15223184837,
+        //   password: 'fu19990327.'
+        // })
+        // console.log(login);
+        // wx.setStorageSync('cookie', login.cookie)
+        // wx.setStorageSync('token', login.token)
+        // const state = await request('/login/refresh')
+        // console.log(state);
+
+        // 音乐日历，获取当前时间戳
+        const {
+          data: musicCalendarListData
+        } = await request('/calendar', {
+          startTime: tools.getTimeStamp(),
+          endTime: tools.getTimeStamp() + 86400 * 6 * 1000
+        })
+        console.log(musicCalendarListData.calendarEvents);
+        this.setData({
+          musicCalendarList: musicCalendarListData.calendarEvents.slice(0, 2)
+        })
+        console.log(tools.getTimeStamp());
+        console.log(tools.getTimeStamp());
+
 
         // 获取排行榜的歌单数据
         let topListData = await request('/toplist')
         const a = tools.getRandomArrayElements(topListData.list, 5)
         let newTopList = []
         for (let i = 0, len = a.length; i < len; i++) {
-          console.log(a[i].id);
+          // console.log(a[i].id);
           const {
             playlist: newTop
           } = await request('/playlist/detail', {
             id: a[i].id
           })
           newTop.tracks.splice(3, newTop.tracks.length - 3)
-          console.log(newTop.tracks.length);
+          // console.log(newTop.tracks.length);
           newTopList.push(newTop)
           this.setData({
             playListNameList: newTopList
           })
         }
-        console.log(newTopList);
+        // console.log(newTopList);
         // topListData.list.sort(function (a, b) {
         //   return b.playCount - a.playCount
         // })

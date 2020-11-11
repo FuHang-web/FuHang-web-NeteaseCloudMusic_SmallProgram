@@ -161,28 +161,30 @@
     padding: 30rpx 20rpx;
     justify-content: space-between;
 }
-.musicCalendar .musicCalendarListBox .musicCalendarListBox-left{
+
+.musicCalendar .musicCalendarListBox .musicCalendarListBox-left {
     display: flex;
     flex-direction: column;
     font-size: 25rpx;
 }
-.test1{
-    display: none !important;
-}
-.musicCalendar .musicCalendarListBox .musicCalendarListBox-left .dayName{
+
+.musicCalendar .musicCalendarListBox .musicCalendarListBox-left .dayName {
     font-weight: bold;
     padding-bottom: 10rpx;
 }
-.musicCalendar .musicCalendarListBox .musicCalendarListBox-left .dayWorks{
+
+.musicCalendar .musicCalendarListBox .musicCalendarListBox-left .dayWorks {
     color: #666;
 }
-.musicCalendar .musicCalendarListBox .musicCalendarListBox-right{
+
+.musicCalendar .musicCalendarListBox .musicCalendarListBox-right {
     width: 90rpx;
     height: 90rpx;
     border-radius: 10rpx;
     overflow: hidden;
 }
-.musicCalendar .musicCalendarListBox .musicCalendarListBox-right image{
+
+.musicCalendar .musicCalendarListBox .musicCalendarListBox-right image {
     width: 100%;
     height: 100%;
 }

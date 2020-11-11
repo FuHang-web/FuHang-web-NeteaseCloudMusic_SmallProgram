@@ -44,22 +44,14 @@
 	<!-- 音乐日历 -->
 	<view class="musicCalendar">
 		<text class="iconfont icon-yinlerili">音乐日历</text>
-		<view class="musicCalendarListBox test1">
+		<view class="musicCalendarListBox test1" wx:for="{{musicCalendarList}}" wx:key="id" wx:for-item="musicCalendarItem">
 			<view class="musicCalendarListBox-left">
-				<text class="dayName">今天</text>
-				<text class="dayWorks">某某的专辑</text>
+				<!-- <text class="dayName">{{(musicCalendarItem.onlineTime)}}</text> -->
+				<text class="dayName">{{util.formatToDate(musicCalendarItem.onlineTime)}}</text>
+				<text class="dayWorks">{{musicCalendarItem.title}}</text>
 			</view>
 			<view class="musicCalendarListBox-right">
-				<image src="/static/images/1.jpg"></image>
-			</view>
-		</view>
-		<view class="musicCalendarListBox test2">
-			<view class="musicCalendarListBox-left">
-				<text class="dayName">明天</text>
-				<text class="dayWorks">某某的专辑</text>
-			</view>
-			<view class="musicCalendarListBox-right">
-				<image src="/static/images/3.jpg"></image>
+				<image src="{{musicCalendarItem.imgUrl}}"></image>
 			</view>
 		</view>
 	</view>

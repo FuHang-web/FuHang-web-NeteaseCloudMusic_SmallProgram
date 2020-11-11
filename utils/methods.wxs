@@ -17,9 +17,30 @@ var filter = {
       param.unit = sizes[i];
     }
     return param;
+  },
+  // 将时间戳转换为日期
+  formatToDate: function (value) {
+    var date = getDate()
+    var year = date.getFullYear()
+    var month = date.getMonth() + 1 < 10 ? '0' + (date.getMonth() + 1) : date.getMonth() + 1
+    var day = date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
+    var dates = getDate(value)
+    var years = dates.getFullYear()
+    var months = dates.getMonth() + 1 < 10 ? '0' + (dates.getMonth() + 1) : dates.getMonth() + 1
+    var days = dates.getDate() < 10 ? '0' + dates.getDate() : dates.getDate()
+    if (year === years && month === months && day === days) {
+      return '今天'
+    } else if (year === years && month === months && days - day === 1) {
+      return '明天'
+    } else if (year === years && month === months && days - day === 2) {
+      return '后天'
+    } else {
+      return years + '-' + months + '-' + days
+    }
   }
 }
 
 module.exports = {
-  numberFormat: filter.numberFormat
+  numberFormat: filter.numberFormat,
+  formatToDate: filter.formatToDate
 }
