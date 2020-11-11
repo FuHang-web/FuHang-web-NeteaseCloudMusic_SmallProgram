@@ -1,3 +1,4 @@
+<wxs src="../../utils/methods.wxs" module="util"></wxs>
 <view class="indexContainer">
 	<!-- 轮播图区域 -->
 	<swiper class="banners" indicator-dots indicator-color="ivory" indicator-active-color='#d43c33' autoplay circular>
@@ -11,42 +12,10 @@
 		<swiper-item class="navItem" wx:for="{{navIconList}}" wx:key="id" wx:for-item="iconItem">
 			<view class="iconBackground {{iconItem.className}}">
 				<image src="{{iconItem.iconUrl}}"></image>
+				<text class="monthDay" wx:if="{{iconItem.id===-1}}">{{monthDay}}</text>
 			</view>
-			<!-- <text class="iconfont icon-meirituijian"></text> -->
 			<text class="iconName">{{iconItem.name}}</text>
 		</swiper-item>
-		<!-- <swiper-item class="navItem">
-			<text class="iconfont icon-FM"></text>
-			<text>私人FM</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-gedan"></text>
-			<text>歌单</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-paihangbang"></text>
-			<text>排行榜</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-zhibo"></text>
-			<text>直播</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-diantai"></text>
-			<text>电台</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-digital-album"></text>
-			<text>数字专辑</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-changge"></text>
-			<text>唱聊</text>
-		</swiper-item>
-		<swiper-item class="navItem">
-			<text class="iconfont icon-icon"></text>
-			<text>游戏专区</text>
-		</swiper-item> -->
 	</swiper>
 
 	<!-- 推荐歌曲区域 -->
@@ -59,7 +28,11 @@
 			<scroll-view class="recommendScroll" enable-flex scroll-x bindscrolltolower="test" enhanced>
 				<view class="scrollItem" wx:for="{{recommendList}}" wx:key="id" wx:for-item="recommendItem">
 					<image src="{{recommendItem.picUrl}}"></image>
-					<text>{{recommendItem.name}}</text>
+					<view class="playIconBox">
+						<text class="iconfont icon-bofang"></text>
+						<text class="playCount">{{util.numberFormat(recommendItem.playCount).value+' '+util.numberFormat(recommendItem.playCount).unit}}</text>
+					</view>
+					<text class="scrollItemName">{{recommendItem.name}}</text>
 				</view>
 				<view>
 					左滑更多
@@ -68,16 +41,39 @@
 		</view>
 	</view>
 
+	<!-- 音乐日历 -->
+	<view class="musicCalendar">
+		<text class="iconfont icon-yinlerili">音乐日历</text>
+		<view class="musicCalendarListBox test1">
+			<view class="musicCalendarListBox-left">
+				<text class="dayName">今天</text>
+				<text class="dayWorks">某某的专辑</text>
+			</view>
+			<view class="musicCalendarListBox-right">
+				<image src="/static/images/1.jpg"></image>
+			</view>
+		</view>
+		<view class="musicCalendarListBox test2">
+			<view class="musicCalendarListBox-left">
+				<text class="dayName">明天</text>
+				<text class="dayWorks">某某的专辑</text>
+			</view>
+			<view class="musicCalendarListBox-right">
+				<image src="/static/images/3.jpg"></image>
+			</view>
+		</view>
+	</view>
+
 	<!-- 排行榜 -->
 	<view class="topList">
 		<!-- 头部区域 -->
-		<NavHeader title="热歌风向标"></NavHeader>
+		<NavHeader title="热歌风向标" iconHeader="icon-paihangbang" iconBtn="icon-bofang1" textBtn="播放全部"></NavHeader>
 		<!-- 内容区域 -->
 		<view class="topListSwiperBox">
-			<swiper class="topListSwiper" next-margin="40rpx">
+			<swiper class="topListSwiper" next-margin="40rpx" snap-to-edge>
 				<swiper-item wx:for="{{playListNameList}}" wx:key="id" wx:for-item="playListItem">
 					<view class="swiperItem">
-						<image src="{{playListItem.tracks[0].al.picUrl}}" class="swiperItemBg"></image>
+						<image src="{{playListItem.tracks[0].al.picUrl}}" class="swiperItemBg" mode="aspectFill"></image>
 						<view class="title">{{playListItem.name}}</view>
 						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem">
 							<image src="{{tracksItem.al.picUrl}}"></image>

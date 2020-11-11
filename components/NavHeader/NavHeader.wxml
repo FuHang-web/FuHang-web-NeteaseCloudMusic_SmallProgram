@@ -1,4 +1,10 @@
 <view class="header">
-  <text class="header-left">{{title}}</text>
-  <text class="header-right">查看更多</text>
+	<view class="header-left">
+		<text class="iconfont {{iconHeader}}"></text>
+		<text>{{title}}</text>
+	</view>
+	<view class="header-right">
+		<text class="iconfont {{iconBtn}}"></text>
+		<text>{{textBtn}}</text>
+	</view>
 </view>

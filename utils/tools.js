@@ -15,6 +15,14 @@ function getRandomArrayElements(arr, count) {
   return shuffled.slice(min);
 }
 
+const date = new Date()
+// 获取当前月中的一天 (1 ~ 31)
+const mGetDate = function () {
+  const monthDay = date.getUTCDate()
+  return monthDay
+}
+
 export default {
-  getRandomArrayElements
+  getRandomArrayElements,
+  mGetDate,
 }

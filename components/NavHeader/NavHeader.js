@@ -8,6 +8,18 @@ Component({
       type: String,
       value: '',
     },
+    iconHeader: {
+      type: String,
+      value: ''
+    },
+    iconBtn: {
+      type: String,
+      value: ''
+    },
+    textBtn: {
+      type: String,
+      value: '查看更多'
+    }
   },
 
   /**

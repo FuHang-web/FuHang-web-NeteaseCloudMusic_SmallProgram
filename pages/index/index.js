@@ -1,6 +1,4 @@
 // pages/index/index.js
-// import { log } from 'console'
-// import { log } from 'console'
 import request from '../../utils/request'
 import tools from '../../utils/tools'
 Page({
@@ -14,6 +12,7 @@ Page({
     recommendList: [], // 推荐歌单的数据
     playListNameList: '', // 热门歌单名字
     navIconList: [], // 图标列表
+    monthDay: '', // 今天是每个月中的第几天
   },
 
   test(e) {
@@ -47,14 +46,15 @@ Page({
         navIconListData.push({
           id: -11,
           name: '唱聊',
-          className: 'iconfont icon-changge'
+          className: 'iconfont icon-changliao'
         }, {
           id: -12,
           name: '游戏专区',
-          className: 'iconfont icon-icon'
+          className: 'iconfont icon-youxi'
         })
         this.setData({
-          navIconList: navIconListData
+          navIconList: navIconListData,
+          monthDay: tools.mGetDate()
         })
         console.log(navIconListData);
 
@@ -68,12 +68,14 @@ Page({
 
         // 获取推荐歌单的数据
         let recommendHeaderList = ['你的歌单精选站', '发现好歌单', '懂你的精选歌单', '人气歌单推荐']
-        let recommendListData = await request('/personalized', {
+        let {result:recommendListData} = await request('/personalized', {
           limit: 10
         })
+        console.log(recommendListData);
+        
         this.setData({
           recommendHeader: recommendHeaderList[Math.floor(Math.random() * recommendHeaderList.length)],
-          recommendList: recommendListData.result,
+          recommendList: recommendListData,
         })
 
         // 获取排行榜的歌单数据
@@ -90,16 +92,15 @@ Page({
           newTop.tracks.splice(3, newTop.tracks.length - 3)
           console.log(newTop.tracks.length);
           newTopList.push(newTop)
+          this.setData({
+            playListNameList: newTopList
+          })
         }
         console.log(newTopList);
         // topListData.list.sort(function (a, b) {
         //   return b.playCount - a.playCount
         // })
         // console.log(topListData);
-        this.setData({
-          playListNameList: newTopList
-        })
-
       },
       fail: (err) => {
         console.log(err);
