@@ -6,7 +6,10 @@ var filter = {
       sizes = ['', '万', '亿', '万亿'],
       i;
     if (value < 100000) {
-      return value
+      return {
+        value: value,
+        unit: ''
+      }
     }
     if (value < k) {
       param.value = value

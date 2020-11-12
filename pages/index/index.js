@@ -14,10 +14,23 @@ Page({
     navIconList: [], // 图标列表
     monthDay: '', // 今天是每个月中的第几天
     musicCalendarList: [], // 音乐日历数据
+    progress_txt1: '00'
   },
 
   test(e) {
     console.log(e);
+  },
+  drawProgressbg() {
+    // 使用 wx.createContext 获取绘图上下文 context
+    var ctx = wx.createCanvasContext('canvasProgressbg', this)
+    ctx.setLineWidth(2); // 设置圆环的宽度
+    ctx.setStrokeStyle('#f50'); // 设置圆环的颜色
+    ctx.setLineCap('round') // 设置圆环端点的形状
+    ctx.beginPath(); //开始一个新的路径
+    ctx.arc(14, 14, 13, 0, 2 * Math.PI, false);
+    //设置一个原点(110,110)，半径为100的圆的路径到当前路径
+    ctx.stroke(); //对当前路径进行描边
+    ctx.draw();
   },
 
   /**
@@ -35,9 +48,6 @@ Page({
         if (result.windowWidth > 750) {
           isSystem = 3
         }
-
-
-
 
         // 首页-图标列表
         const {
@@ -144,7 +154,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.drawProgressbg();
   },
 
   /**

@@ -1,11 +1,30 @@
 <wxs src="../../utils/methods.wxs" module="util"></wxs>
 <view class="indexContainer">
+	<view class="topHeaderBox">
+		<view class="topHeader">
+			<text class="topHeader-voice iconfont icon-xinyuyin"></text>
+			<view class="topHeader-search">
+				<text class="iconfont icon-sousuo"></text>
+				<text>大家都在搜 午睡</text>
+			</view>
+			<view class="topHeader-song">
+				<view class='progress_box'>
+					<canvas class="progress_bg" canvas-id="canvasProgressbg"></canvas>
+					<view class="progress_text">
+						<image src="/static/images/1.jpg"></image>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 	<!-- 轮播图区域 -->
-	<swiper class="banners" indicator-dots indicator-color="ivory" indicator-active-color='#d43c33' autoplay circular>
-		<swiper-item wx:for="{{bannerList}}" wx:key="bannerId">
-			<image src="{{item.pic}}"></image>
-		</swiper-item>
-	</swiper>
+	<view class="swiperBox">
+		<swiper class="banners" indicator-dots indicator-color="ivory" indicator-active-color='#d43c33' autoplay circular>
+			<swiper-item wx:for="{{bannerList}}" wx:key="bannerId">
+				<image src="{{item.pic}}"></image>
+			</swiper-item>
+		</swiper>
+	</view>
 
 	<!-- 5个图标导航区域 -->
 	<swiper class="navContainer" display-multiple-items="5" next-margin="50rpx">
