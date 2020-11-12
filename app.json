@@ -1,12 +1,39 @@
 {
   "pages": [
-    "pages/index/index"
+    "pages/index/index",
+    "pages/video/video",
+    "pages/mine/mine"
   ],
-  "window": {
-    "navigationBarBackgroundColor": "#d43c33",
-    "navigationBarTextStyle": "white",
-    "navigationBarTitleText": "娱乐自嗨"
-  },
   "style": "v2",
-  "sitemapLocation": "sitemap.json"
+  "sitemapLocation": "sitemap.json",
+  "window": {
+    "navigationBarBackgroundColor": "#03A0D6",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "lavender在线音乐"
+
+  },
+  "tabBar": {
+    "selectedColor": "#03A0D6",
+    "color": "#888888",
+    "backgroundColor": "#fff",
+    "list": [{
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "/static/images/tabs/tab_home.png",
+        "selectedIconPath": "/static/images/tabs/tab_home_active.png"
+      },
+      {
+        "pagePath": "pages/video/video",
+        "text": "视频",
+        "iconPath": "/static/images/tabs/tab_video.png",
+        "selectedIconPath": "/static/images/tabs/tab_video_active.png"
+      },
+      {
+        "pagePath": "pages/mine/mine",
+        "text": "个人中心",
+        "iconPath": "/static/images/tabs/tab_mine.png",
+        "selectedIconPath": "/static/images/tabs/tab_mine_active.png"
+      }
+    ]
+  }
 }

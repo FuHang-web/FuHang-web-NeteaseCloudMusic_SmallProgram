@@ -53,26 +53,26 @@ Page({
         const {
           data: navIconListData
         } = await request('/homepage/dragon/ball')
-        navIconListData.splice(1, 0, {
-          id: -10,
-          name: '私人FM',
-          className: 'iconfont icon-FM'
-        })
-        navIconListData.push({
-          id: -11,
-          name: '唱聊',
-          className: 'iconfont icon-changliao'
-        }, {
-          id: -12,
-          name: '游戏专区',
-          className: 'iconfont icon-youxi'
-        })
+        // navIconListData.splice(1, 0, {
+        //   id: -10,
+        //   name: '私人FM',
+        //   className: 'iconfont icon-FM'
+        // })
+        // navIconListData.push({
+        //   id: -11,
+        //   name: '唱聊',
+        //   className: 'iconfont icon-changliao'
+        // }, {
+        //   id: -12,
+        //   name: '游戏专区',
+        //   className: 'iconfont icon-youxi'
+        // })
 
         this.setData({
           navIconList: navIconListData,
           monthDay: tools.mGetDate()
         })
-        console.log(navIconListData);
+        // console.log(navIconListData);
 
         // 获取轮播图页面数据
         let bannerListData = await request('/banner', {
@@ -87,12 +87,13 @@ Page({
         let {
           result: recommendListData
         } = await request('/personalized', {
-          limit: 10
+          limit: 6
         })
         console.log(recommendListData);
 
         this.setData({
-          recommendHeader: recommendHeaderList[Math.floor(Math.random() * recommendHeaderList.length)],
+          recommendHeader: '精选歌单',
+          // recommendHeader: recommendHeaderList[Math.floor(Math.random() * recommendHeaderList.length)],
           recommendList: recommendListData,
         })
         // const login = await request('/login/cellphone', {
@@ -114,7 +115,7 @@ Page({
         })
         console.log(musicCalendarListData.calendarEvents);
         this.setData({
-          musicCalendarList: musicCalendarListData.calendarEvents.slice(0, 2)
+          musicCalendarList: musicCalendarListData.calendarEvents.slice(0, 1)
         })
         console.log(tools.getTimeStamp());
         console.log(tools.getTimeStamp());

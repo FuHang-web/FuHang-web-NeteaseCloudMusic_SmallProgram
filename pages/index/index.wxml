@@ -62,7 +62,7 @@
 
 	<!-- 音乐日历 -->
 	<view class="musicCalendar">
-		<text class="iconfont icon-yinlerili">音乐日历</text>
+		<text class="iconfont icon-yinlerili">专辑预告</text>
 		<view class="musicCalendarListBox test1" wx:for="{{musicCalendarList}}" wx:key="id" wx:for-item="musicCalendarItem">
 			<view class="musicCalendarListBox-left">
 				<!-- <text class="dayName">{{(musicCalendarItem.onlineTime)}}</text> -->
@@ -78,7 +78,7 @@
 	<!-- 排行榜 -->
 	<view class="topList">
 		<!-- 头部区域 -->
-		<NavHeader title="热歌风向标" iconHeader="icon-paihangbang" iconBtn="icon-bofang1" textBtn="播放全部"></NavHeader>
+		<NavHeader title="排行榜" iconHeader="icon-paihangbang" iconBtn="icon-bofang1" textBtn="播放全部"></NavHeader>
 		<!-- 内容区域 -->
 		<view class="topListSwiperBox">
 			<swiper class="topListSwiper" next-margin="40rpx" snap-to-edge>
