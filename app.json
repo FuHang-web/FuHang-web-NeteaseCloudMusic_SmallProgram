@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/playDetails/playDetails",
     "pages/index/index",
     "pages/video/video",
     "pages/mine/mine"
@@ -7,13 +8,13 @@
   "style": "v2",
   "sitemapLocation": "sitemap.json",
   "window": {
-    "navigationBarBackgroundColor": "#03A0D6",
-    "navigationBarTextStyle": "white",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
     "navigationBarTitleText": "lavender在线音乐"
 
   },
   "tabBar": {
-    "selectedColor": "#03A0D6",
+    "selectedColor": "#FF3719",
     "color": "#888888",
     "backgroundColor": "#fff",
     "list": [{

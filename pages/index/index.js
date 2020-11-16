@@ -20,6 +20,13 @@ Page({
   test(e) {
     console.log(e);
   },
+  getMusicData(data) {
+    console.log(data.currentTarget.dataset.musicdata);
+    console.log(data.currentTarget.dataset.musicdata.id);
+    wx.navigateTo({
+      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id,
+    })
+  },
   drawProgressbg() {
     // 使用 wx.createContext 获取绘图上下文 context
     var ctx = wx.createCanvasContext('canvasProgressbg', this)
@@ -123,7 +130,7 @@ Page({
 
         // 获取排行榜的歌单数据
         let topListData = await request('/toplist')
-        const a = tools.getRandomArrayElements(topListData.list, 5)
+        const a = tools.getRandomArrayElements(topListData.list, 10)
         let newTopList = []
         for (let i = 0, len = a.length; i < len; i++) {
           // console.log(a[i].id);

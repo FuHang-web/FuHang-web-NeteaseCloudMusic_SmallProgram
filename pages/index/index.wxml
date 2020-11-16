@@ -86,7 +86,7 @@
 					<view class="swiperItem">
 						<image src="{{playListItem.tracks[0].al.picUrl}}" class="swiperItemBg" mode="aspectFill"></image>
 						<view class="title">{{playListItem.name}}</view>
-						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem">
+						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem" catchtap="getMusicData" data-musicData="{{tracksItem}}">
 							<image src="{{tracksItem.al.picUrl}}"></image>
 							<text class="count">{{index+1}}</text>
 							<view class="names">
