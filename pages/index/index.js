@@ -21,10 +21,10 @@ Page({
     console.log(e);
   },
   getMusicData(data) {
-    console.log(data.currentTarget.dataset.musicdata);
+    console.log(data.currentTarget.dataset.musicdata.name);
     console.log(data.currentTarget.dataset.musicdata.id);
     wx.navigateTo({
-      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id,
+      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id + '&name=' + data.currentTarget.dataset.musicdata.name,
     })
   },
   drawProgressbg() {
@@ -55,6 +55,8 @@ Page({
         if (result.windowWidth > 750) {
           isSystem = 3
         }
+        console.log(result);
+        
 
         // 首页-图标列表
         const {

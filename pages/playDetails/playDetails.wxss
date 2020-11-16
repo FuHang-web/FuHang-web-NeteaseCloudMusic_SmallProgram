@@ -1,1 +1,16 @@
-/* pages/playDetails/playDetails.wxss */
+.playDetailsBox {
+  background-color: rgba(0, 0, 0, .3);
+  display: flex;
+  flex-direction: column;
+}
+
+/* 歌词背景 */
+.lyricBgBox {
+  flex: 1;
+}
+
+/* 功能按钮 */
+.controlBar {
+  height: 260rpx;
+  /* background-color: #eee; */
+}

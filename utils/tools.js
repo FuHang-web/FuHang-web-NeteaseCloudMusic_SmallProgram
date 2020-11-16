@@ -1,5 +1,4 @@
 // 配置公共的工具函数
-
 // 随机从数组中取出n个元素
 function getRandomArrayElements(arr, count) {
   let shuffled = arr.slice(0),
@@ -26,8 +25,14 @@ const getTimeStamp = function () {
   const timeStamp = date.getTime()
   return timeStamp
 }
+// 获取设备信息
+const deviceInformation = function () {
+  const a = wx.getSystemInfoSync()
+  return a
+}
 export default {
   getRandomArrayElements,
   mGetDate,
   getTimeStamp,
+  deviceInformation
 }
