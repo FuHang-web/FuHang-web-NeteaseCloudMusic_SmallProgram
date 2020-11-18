@@ -1,3 +1,5 @@
+@import "/static/iconfont/iconfont.wxss";
+
 .playDetailsBox {
   background-color: rgba(0, 0, 0, .3);
   display: flex;
@@ -12,5 +14,28 @@
 /* 功能按钮 */
 .controlBar {
   height: 260rpx;
+
   /* background-color: #eee; */
+}
+
+.controlButton {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.controlButton .iconfont {
+  color: #eee;
+}
+
+.icon-zanting,
+.icon-bofang-wangyiicon {
+  font-size: 100rpx;
+}
+
+.icon-xunhuanbofang-wangyiicon,
+.icon-shangyiqu,
+.icon-xiayiqu,
+.icon-caidan {
+  font-size: 48rpx;
 }

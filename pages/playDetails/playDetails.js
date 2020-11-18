@@ -1,7 +1,7 @@
 // pages/playDetails/playDetails.js
 import request from '../../utils/request'
 import tools from '../../utils/tools'
-const innerAudioContext = wx.createInnerAudioContext()
+const backgroundAudioManager = wx.getBackgroundAudioManager()
 Page({
 
   /**
@@ -12,16 +12,29 @@ Page({
     musicName: '',
     musicUrlData: '',
     lyricsData: '',
-    src: ''
+    src: '',
+    isPlayOrPause: 0, // 播放，点击暂停
+    musicLength: '', // 音乐时间长度
   },
+  // 进度条
   slider1change(e) {
-    console.log(e);
+    console.log(e.detail.value);
+    innerAudioContext.seek(e.detail.value)
   },
-  topTest() {
-    innerAudioContext.stop()
-    innerAudioContext.onStop((a) => {
-      console.log(a);
-    })
+  // 
+  clickPlayOrPause(e) {
+    console.log(e);
+    if (this.data.isPlayOrPause === 0) {
+      // innerAudioContext.play()
+      this.setData({
+        isPlayOrPause: 1
+      })
+    } else {
+      // innerAudioContext.pause()
+      this.setData({
+        isPlayOrPause: 0
+      })
+    }
   },
 
 
@@ -40,13 +53,18 @@ Page({
       // musicId: options.id
       height: `${height}rpx`,
       musicId: "514761281",
-      musicName: '测试一下'
+      musicName: '白羊'
     })
     wx.setNavigationBarTitle({
       title: this.data.musicName
     })
 
     const _self = this
+    const musicDetails = await request('/song/detail',{
+      ids:_self.data.musicId
+    })
+    console.log(musicDetails.songs[0]);
+    
     const musicUrl = await request('/song/url', {
       id: _self.data.musicId
     })
@@ -58,30 +76,26 @@ Page({
       lyricsData: lyrics
     })
     console.log(this.data);
+    backgroundAudioManager.title = this.data.musicName
+    backgroundAudioManager.epname = this.data.musicName
+    backgroundAudioManager.singer = '许巍'
+    backgroundAudioManager.coverImgUrl = 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000'
+    // 设置了 src 之后会自动播放
+    backgroundAudioManager.src = 'http://m801.music.126.net/20201118164611/9ff441947853e0ea93293d626a377db3/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/4205540412/91c7/e645/9384/f196126197d34654ac0ed1d6de14829c.mp3'
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
-    innerAudioContext.autoplay = true
-    innerAudioContext.src = "http://m8.music.126.net/20201117010420/8ffff6a65ea0daffeecb32ada257912d/ymusic/25a2/4ff4/52fc/d664724d25de35a8d4e23c1b986c60b5.mp3"
-    innerAudioContext.onPlay(() => {
-      console.log('开始播放')
-    })
-    innerAudioContext.onError((res) => {
-      console.log(res.errMsg)
-      console.log(res.errCode)
-    })
-    //音频进入可以播放状态，但不保证后面可以流畅播放
-    innerAudioContext.onCanplay(() => {
-      innerAudioContext.duration //类似初始化-必须触发-不触发此函数延时也获取不到
-      setTimeout(function () {
-        //在这里就可以获取到大家梦寐以求的时长了
-        console.log(innerAudioContext.duration); //延时获取长度 单位：秒
-      }, 100) //这里设置延时1秒获取
-    })
+    // const _self = this
+    // console.log(this.data);
+    // backgroundAudioManager.title = '此时此刻'
+    // backgroundAudioManager.epname = '此时此刻'
+    // backgroundAudioManager.singer = '许巍'
+    // backgroundAudioManager.coverImgUrl = 'http://y.gtimg.cn/music/photo_new/T002R300x300M000003rsKF44GyaSk.jpg?max_age=2592000'
+    // // 设置了 src 之后会自动播放
+    // backgroundAudioManager.src = 'http://m801.music.126.net/20201118164611/9ff441947853e0ea93293d626a377db3/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/4205540412/91c7/e645/9384/f196126197d34654ac0ed1d6de14829c.mp3'
   },
 
   /**

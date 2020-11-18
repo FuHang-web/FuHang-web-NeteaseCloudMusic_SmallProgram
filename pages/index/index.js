@@ -21,10 +21,11 @@ Page({
     console.log(e);
   },
   getMusicData(data) {
-    console.log(data.currentTarget.dataset.musicdata.name);
+    console.log(data.currentTarget.dataset);
+    console.log(data.currentTarget.dataset.musicdata);
     console.log(data.currentTarget.dataset.musicdata.id);
     wx.navigateTo({
-      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id + '&name=' + data.currentTarget.dataset.musicdata.name,
+      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id + '&listId=' + data.currentTarget.dataset.songlistdata.id,
     })
   },
   drawProgressbg() {

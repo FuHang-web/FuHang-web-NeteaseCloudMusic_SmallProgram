@@ -49,7 +49,8 @@
 					<image src="{{recommendItem.picUrl}}"></image>
 					<view class="playIconBox">
 						<text class="iconfont icon-bofang"></text>
-						<text class="playCount">{{util.numberFormat(recommendItem.playCount).value+' '+util.numberFormat(recommendItem.playCount).unit}}</text>
+						<text
+							class="playCount">{{util.numberFormat(recommendItem.playCount).value+' '+util.numberFormat(recommendItem.playCount).unit}}</text>
 					</view>
 					<text class="scrollItemName">{{recommendItem.name}}</text>
 				</view>
@@ -86,7 +87,8 @@
 					<view class="swiperItem">
 						<image src="{{playListItem.tracks[0].al.picUrl}}" class="swiperItemBg" mode="aspectFill"></image>
 						<view class="title">{{playListItem.name}}</view>
-						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem" catchtap="getMusicData" data-musicData="{{tracksItem}}">
+						<view class="musicItem" wx:for="{{playListItem.tracks}}" wx:key="id" wx:for-item="tracksItem"
+							catchtap="getMusicData" data-songListData="{{playListItem}}" data-musicData="{{tracksItem}}">
 							<image src="{{tracksItem.al.picUrl}}"></image>
 							<text class="count">{{index+1}}</text>
 							<view class="names">

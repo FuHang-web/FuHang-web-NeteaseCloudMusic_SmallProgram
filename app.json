@@ -13,6 +13,7 @@
     "navigationBarTitleText": "lavender在线音乐"
 
   },
+  "requiredBackgroundModes": ["audio"],
   "tabBar": {
     "selectedColor": "#FF3719",
     "color": "#888888",
