@@ -2,15 +2,14 @@
 	<view class="lyricBgBox"></view>
 	<view class="controlBar">
 		<view class="slider-box">
-			<slider bindchange="slider1change" left-icon="cancel" right-icon="success_no_circle" block-size="12"
-				backgroundColor="#bbb" activeColor="#eee" max="{{musicLength}}" />
+			<slider bindchange="sliderchange" left-icon="cancel" right-icon="success_no_circle" block-size="12" backgroundColor="#bbb" activeColor="#eee" max="{{musicLength}}"/>
 		</view>
 		<view class="controlButton">
 			<text class="iconfont icon-xunhuanbofang-wangyiicon"></text>
-			<text class="iconfont icon-shangyiqu"></text>
+			<text class="iconfont icon-shangyiqu" catchtap="shangyiqu"></text>
 			<text class="iconfont icon-{{isPlayOrPause===0?'zanting':'bofang-wangyiicon'}}"
 				catchtap="clickPlayOrPause"></text>
-			<text class="iconfont icon-xiayiqu"></text>
+			<text class="iconfont icon-xiayiqu" catchtap="xiayiqu"></text>
 			<text class="iconfont icon-caidan"></text>
 		</view>
 	</view>
