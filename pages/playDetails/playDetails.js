@@ -15,7 +15,7 @@ Page({
     musicDetailsData: '',
     src: '',
     isPlayOrPause: 0, // 播放，点击暂停
-    musicLength: 100, // 音乐时间长度
+    musicLength: 0, // 音乐时间长度
     listIdIndex: '', // 歌单列表当前歌曲的下标
     playListData: [],
   },
@@ -78,8 +78,14 @@ Page({
         isPlayOrPause: 1
       })
       setTimeout(() => {
+        this.setData({
+          musicLength: backgroundAudioManager.duration
+        })
         console.log(backgroundAudioManager.duration);
       }, 100);
+    })
+    backgroundAudioManager.onEnded(() => {
+      this.xiayiqu()
     })
 
   },
