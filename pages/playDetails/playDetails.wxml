@@ -1,11 +1,25 @@
 <view class="playDetailsBox" style="height:{{height}}">
-	<view class="lyricBgBox"></view>
+	<view class="lyricBgBox">
+		<view class="lyrics" catchtap="clickTest">
+			<view wx:if="{{test}}">
+				<scroll-view class="lyricsScroll" scroll-y>
+					<view wx:for="{{lyricsData}}" class="lyricsItem {{lyricsActiceIndex===index?'lyricsActice':''}}">{{item.text}}
+					</view>
+				</scroll-view>
+			</view>
+			<view class="bgImage" wx:else></view>
+		</view>
+	</view>
 	<view class="controlBar">
 		<view class="slider-box">
-			<slider bindchange="sliderchange" left-icon="cancel" right-icon="success_no_circle" block-size="12" backgroundColor="#bbb" activeColor="#eee" max="{{musicLength}}"/>
+			<text class="musicTime">{{currentTime}}</text>
+			<slider class="musicSlider" bindchange="sliderchange" left-icon="cancel" right-icon="success_no_circle" block-size="12"
+				backgroundColor="#bbb" activeColor="#eee" max="{{musicLength}}" value="{{sliderValue}}" step="0.001" />
+			<text class="musicTime">{{totalTime}}</text>
 		</view>
 		<view class="controlButton">
-			<text class="iconfont icon-xunhuanbofang-wangyiicon"></text>
+			<text class="iconfont icon-{{playType===0?'loopType_0':(playType===1?'loopType_1':'loopType_2')}}"
+				catchtap="loopClick"></text>
 			<text class="iconfont icon-shangyiqu" catchtap="shangyiqu"></text>
 			<text class="iconfont icon-{{isPlayOrPause===0?'zanting':'bofang-wangyiicon'}}"
 				catchtap="clickPlayOrPause"></text>

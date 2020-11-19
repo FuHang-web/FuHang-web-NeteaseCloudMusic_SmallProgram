@@ -13,6 +13,15 @@ function getRandomArrayElements(arr, count) {
   }
   return shuffled.slice(min);
 }
+// 将歌曲时长(毫秒)转为 分秒 的格式
+const formatMillisecond = function (time) {
+  let m = Math.floor(time / 1000 / 60 % 60)
+  m = m < 10 ? '0' + m : m
+  let s = Math.floor(time / 1000 % 60);
+  s = s < 10 ? '0' + s : s
+  let result = m + ':' + s
+  return result
+}
 
 const date = new Date()
 // 获取当前月中的一天 (1 ~ 31)
@@ -32,6 +41,7 @@ const deviceInformation = function () {
 }
 export default {
   getRandomArrayElements,
+  formatMillisecond,
   mGetDate,
   getTimeStamp,
   deviceInformation
