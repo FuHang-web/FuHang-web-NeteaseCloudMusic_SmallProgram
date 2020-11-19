@@ -32,6 +32,43 @@
   font-size: 28rpx;
 }
 
+.lyricBgBox .lyrics .bgImage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.lyricBgBox .lyrics .bgImage .ringBox {
+  width: 440rpx;
+  height: 440rpx;
+  background-color: #2D445B;
+  border-radius: 50%;
+  position: relative;
+}
+
+.lyricBgBox .lyrics .bgImage .ringBox::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4602256867/5855/63fb/325b/d7e4e3a244701ee85fecb5d4f6b5bd57.png?imageView=&quality=75&thumbnail=200y200');
+  background-size: contain;
+  z-index: 9;
+}
+
+.lyricBgBox .lyrics .bgImage .ringBox image {
+  width: 300rpx;
+  height: 300rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+}
+
 /* 歌词单行选中 */
 .lyricsActice {
   color: #fff !important;

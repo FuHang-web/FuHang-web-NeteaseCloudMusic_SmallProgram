@@ -7,7 +7,12 @@
 					</view>
 				</scroll-view>
 			</view>
-			<view class="bgImage" wx:else></view>
+			<view class="bgImage" wx:else>
+				<view class="ringBox">
+					<!-- <image src="{{musicDetailsData.al.picUrl}}" alt=""> -->
+						<image src="{{musicDetailsData.al.picUrl}}"></image>
+				</view>
+			</view>
 		</view>
 	</view>
 	<view class="controlBar">

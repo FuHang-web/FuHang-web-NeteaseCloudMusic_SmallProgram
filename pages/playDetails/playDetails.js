@@ -8,7 +8,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    test: true,
+    test: false,
     musicId: '',
     musicName: '',
     musicUrlData: '',
@@ -61,7 +61,7 @@ Page({
     const musicDetails = await request('/song/detail', {
       ids: id
     })
-    console.log();
+    console.log(musicDetails);
 
     console.log(musicDetails.songs[0].dt);
     // 音乐的url
@@ -88,6 +88,7 @@ Page({
       })
       this.setData({
         lyricsData: lyricsResult,
+        lyricsActiceIndex: 0
       })
     }
     // console.log(lyrics.lrc.lyric);
