@@ -17,7 +17,7 @@ Page({
     src: '',
     isPlayOrPause: 0, // 播放，点击暂停
     musicLength: 0, // 音乐时间长度
-    listIdIndex: '', // 歌单列表当前歌曲的下标
+    listIdIndex: 0, // 歌单列表当前歌曲的下标
     playListData: [], // 当前歌单所有音乐
     sliderValue: 0, // 进度条的value值
     playType: 0, // 0 列表循环，1 单曲循环，2 随机播放
@@ -55,34 +55,39 @@ Page({
     }
   },
   // 获取到音乐ID之后执行
-  async getMusicIdPerform(id) {
+  async getMusicIdPerform(musicId) {
     // const _self = this
     // 音乐的详情
-    const musicDetails = await request('/song/detail', {
-      ids: id
+    const {
+      songs: [musicDetails]
+    } = await request('/song/detail', {
+      ids: musicId
     })
-    console.log(musicDetails);
-
-    console.log(musicDetails.songs[0].dt);
     // 音乐的url
-    const musicUrl = await request('/song/url', {
-      id: id
+    const {
+      data: [musicUrl]
+    } = await request('/song/url', {
+      id: musicId
     })
+    console.log(musicUrl);
 
     // 歌词
-    const lyrics = await request('/lyric', {
-      id: id
+    const {
+      lrc: lyrics
+    } = await request('/lyric', {
+      id: musicId
     })
-    if (lyrics.lrc) {
+    console.log(lyrics);
+
+    if (lyrics) {
       // 处理歌词
-      let lyricsResult = lyrics.lrc.lyric.split("\n").map(r => {
+      let lyricsResult = lyrics.lyric.split("\n").map(r => {
         let lyricsArr = r.trim().substr(1).split(']')
         return {
           time: lyricsArr[0],
           text: lyricsArr[1]
         }
       })
-      console.log(lyricsResult);
       lyricsResult = lyricsResult.sort((a, b) => {
         return a.time > b.time ? 1 : -1
       })
@@ -91,29 +96,21 @@ Page({
         lyricsActiceIndex: 0
       })
     }
-    // console.log(lyrics.lrc.lyric);
-
-
-    // console.log(lyrics.lrc.lyric.split("\n"));
-
     this.setData({
-      musicUrlData: musicUrl.data[0],
-      // lyricsData: lyrics,
-      musicDetailsData: musicDetails.songs[0],
-      totalTime: tools.formatMillisecond(musicDetails.songs[0].dt)
+      musicUrlData: musicUrl,
+      musicDetailsData: musicDetails,
+      totalTime: tools.formatMillisecond(musicDetails.dt)
     })
-
     // 顶部标题
     wx.setNavigationBarTitle({
-      title: musicDetails.songs[0].name
+      title: musicDetails.name
     })
-
-    backgroundAudioManager.title = musicDetails.songs[0].name
-    backgroundAudioManager.epname = musicDetails.songs[0].name
-    backgroundAudioManager.singer = musicDetails.songs[0].ar[0].name
-    backgroundAudioManager.coverImgUrl = musicDetails.songs[0].al.picUrl
+    backgroundAudioManager.title = musicDetails.name
+    backgroundAudioManager.epname = musicDetails.name
+    backgroundAudioManager.singer = musicDetails.ar[0].name
+    backgroundAudioManager.coverImgUrl = musicDetails.al.picUrl
     // 设置了 src 之后会自动播放
-    backgroundAudioManager.src = musicUrl.data[0].url
+    backgroundAudioManager.src = musicUrl.url
   },
   // 播放类型的设置---列表循环|单曲循环|随机播放
   loopClick() {
@@ -125,28 +122,37 @@ Page({
         playType: 0
       })
     }
-    console.log(this.data.playType);
   },
-  shangyiqu() {
-    if (this.data.listIdIndex === 0) {
-      this.setData({
-        listIdIndex: this.data.playListData.length
-      })
-    }
+  onPrev() {
+    console.log(this.data.listIdIndex);
     this.setData({
       listIdIndex: this.data.listIdIndex - 1
     })
+    console.log(this.data.listIdIndex);
+    if (this.data.listIdIndex === -1) {
+      this.setData({
+        listIdIndex: this.data.playListData.length - 1
+      })
+    }
     this.getMusicIdPerform(this.data.playListData[this.data.listIdIndex].id)
   },
-  xiayiqu() {
+  onNext() {
+    console.log(typeof this.data.listIdIndex);
+
+    console.log(this.data.listIdIndex);
+    console.log(this.data.playListData);
+
     this.setData({
       listIdIndex: this.data.listIdIndex + 1
     })
+    console.log(typeof this.data.listIdIndex);
+    console.log(this.data.listIdIndex);
     if (this.data.listIdIndex > this.data.playListData.length - 1) {
       this.setData({
         listIdIndex: 0
       })
     }
+    console.log(this.data.listIdIndex);
     this.getMusicIdPerform(this.data.playListData[this.data.listIdIndex].id)
     console.log(this.data.playListData);
     console.log(this.data.listIdIndex);
@@ -160,23 +166,25 @@ Page({
     const systemData = tools.deviceInformation()
     let height = systemData.windowHeight * (750 / systemData.windowWidth);
     this.setData({
-      // musicId: options.id,
+      musicId: options.musicId,
       height: `${height}rpx`,
-      musicId: 1481688897,
     })
-    // 获取歌单详情
-    const playList = await request('/playlist/detail', {
-      id: "2250011882"
-    })
-    console.log(playList.playlist.tracks);
-    let currentProfileIndex = (playList.playlist.tracks || []).findIndex((profile) => profile.id === this.data.musicId);
-    this.setData({
-      playListData: playList.playlist.tracks,
-      listIdIndex: currentProfileIndex
-    })
-    console.log(currentProfileIndex);
-    this.getMusicIdPerform(playList.playlist.tracks[currentProfileIndex].id)
-    console.log(playList.playlist.tracks[currentProfileIndex].id);
+    try {
+      // 获取存储在storage中的榜单详情
+      let rankingList = wx.getStorageSync('rankingList')
+      if (rankingList) {
+        console.log(typeof options.index);
+
+        this.setData({
+          playListData: rankingList,
+          listIdIndex: parseInt(options.index)
+        })
+        this.getMusicIdPerform(options.musicId)
+      }
+    } catch (e) {
+      console.log(e);
+    }
+    // let currentProfileIndex = (playList.playlist.tracks || []).findIndex((profile) => profile.id === this.data.musicId);
   },
 
   /**
@@ -226,22 +234,25 @@ Page({
     // 监听背景音频自然播放结束事件
     backgroundAudioManager.onEnded(() => {
       if (this.data.playType === 0) {
-        this.xiayiqu()
+        this.onNext()
       } else if (this.data.playType === 1) {
         this.getMusicIdPerform(this.data.playListData[this.data.listIdIndex].id)
       } else {
         let rand = Math.floor(Math.random() * this.data.playListData.length);
-        this.getMusicIdPerform(this.data.playListData[rand].id)
+        this.setData({
+          listIdIndex: rand
+        })
+        this.getMusicIdPerform(this.data.playListData[this.data.listIdIndex].id)
         console.log(rand);
       }
     })
     // 监听用户在系统音乐播放面板点击下一曲事件（仅iOS）
     backgroundAudioManager.onNext(() => {
-      this.xiayiqu()
+      this.onNext()
     })
     // 监听用户在系统音乐播放面板点击上一曲事件（仅iOS）
     backgroundAudioManager.onPrev(() => {
-      this.shangyiqu()
+      this.onPrev()
     })
   },
 

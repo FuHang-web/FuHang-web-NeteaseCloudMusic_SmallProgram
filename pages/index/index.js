@@ -20,12 +20,24 @@ Page({
   test(e) {
     console.log(e);
   },
-  getMusicData(data) {
-    console.log(data.currentTarget.dataset);
-    console.log(data.currentTarget.dataset.musicdata);
-    console.log(data.currentTarget.dataset.musicdata.id);
+  async getMusicData(data) {
+    const ds = data.currentTarget.dataset
+    console.log(ds);
+    const rankingList = await request('/playlist/detail', {
+      id: ds.rankinglistid
+    })
+    console.log(rankingList.playlist.tracks);
+    try {
+      wx.setStorageSync('rankingList', rankingList.playlist.tracks)
+      // wx.setStorageSync('rankingListIndex', ds.index)
+    } catch (e) {
+      console.log(e);
+    }
+    // console.log(data.currentTarget.dataset.musicdata);
+    // console.log(data.currentTarget.dataset.musicdata.id);
     wx.navigateTo({
-      url: '/pages/playDetails/playDetails?id=' + data.currentTarget.dataset.musicdata.id + '&listId=' + data.currentTarget.dataset.songlistdata.id,
+      // musicId
+      url: `/pages/playDetails/playDetails?musicId=${ds.musicid}&index=${ds.index}`
     })
   },
   drawProgressbg() {
@@ -57,7 +69,7 @@ Page({
           isSystem = 3
         }
         console.log(result);
-        
+
 
         // 首页-图标列表
         const {

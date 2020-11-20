@@ -1,9 +1,10 @@
 <view class="playDetailsBox" style="height:{{height}}">
+	<image class="playDetailsBoxBgImage" src="{{musicDetailsData.al.picUrl}}" mode="aspectFill"></image>
 	<view class="lyricBgBox">
 		<view class="lyrics" catchtap="clickTest">
 			<view wx:if="{{test}}">
 				<scroll-view class="lyricsScroll" scroll-y>
-					<view wx:for="{{lyricsData}}" class="lyricsItem {{lyricsActiceIndex===index?'lyricsActice':''}}">{{item.text}}
+					<view wx:for="{{lyricsData}}" wx:key="time" wx:for-item="lyricsItem" class="lyricsItem {{lyricsActiceIndex===index?'lyricsActice':''}}">{{lyricsItem.text}}
 					</view>
 				</scroll-view>
 			</view>
@@ -25,10 +26,10 @@
 		<view class="controlButton">
 			<text class="iconfont icon-{{playType===0?'loopType_0':(playType===1?'loopType_1':'loopType_2')}}"
 				catchtap="loopClick"></text>
-			<text class="iconfont icon-shangyiqu" catchtap="shangyiqu"></text>
+			<text class="iconfont icon-shangyiqu" catchtap="onPrev"></text>
 			<text class="iconfont icon-{{isPlayOrPause===0?'zanting':'bofang-wangyiicon'}}"
 				catchtap="clickPlayOrPause"></text>
-			<text class="iconfont icon-xiayiqu" catchtap="xiayiqu"></text>
+			<text class="iconfont icon-xiayiqu" catchtap="onNext"></text>
 			<text class="iconfont icon-caidan"></text>
 		</view>
 	</view>

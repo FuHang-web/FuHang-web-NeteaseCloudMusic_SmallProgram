@@ -4,8 +4,19 @@
   background-color: rgba(0, 0, 0, .3);
   display: flex;
   flex-direction: column;
+  position: relative;
 }
-
+.playDetailsBox .playDetailsBoxBgImage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  filter: blur(22px);
+  z-index: -1;
+  transform: scale(1.2);
+  overflow: hidden;
+}
 /* 歌词背景 */
 .lyricBgBox {
   flex: 1;
@@ -27,9 +38,8 @@
 
 .lyricBgBox .lyrics .lyricsScroll {
   height: 100%;
-  background-color: #075;
+  /* background-color: #075; */
   text-align: center;
-  font-size: 28rpx;
 }
 
 .lyricBgBox .lyrics .bgImage {
@@ -40,9 +50,9 @@
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox {
-  width: 440rpx;
-  height: 440rpx;
-  background-color: #2D445B;
+  width: 592rpx;
+  height: 592rpx;
+  background-color: rgba(0, 0, 0, .1);
   border-radius: 50%;
   position: relative;
 }
@@ -56,12 +66,11 @@
   height: 100%;
   background-image: url('https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4602256867/5855/63fb/325b/d7e4e3a244701ee85fecb5d4f6b5bd57.png?imageView=&quality=75&thumbnail=200y200');
   background-size: contain;
-  z-index: 9;
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox image {
-  width: 300rpx;
-  height: 300rpx;
+  width: 368rpx;
+  height: 368rpx;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -75,14 +84,15 @@
 }
 
 .lyricBgBox .lyrics .lyricsScroll .lyricsItem {
-  line-height: 48rpx;
-  color: #888;
+  line-height: 56rpx;
+  color: #bbb;
+  font-size: 26rpx;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* 功能按钮 */
 .controlBar {
   height: 260rpx;
-
   /* background-color: #eee; */
 }
 
