@@ -8,12 +8,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-    switch: false,  // 歌词与播放器页面的切换
+    switch: false, // 歌词与播放器页面的切换
     // musicId: '',
-    musicName: '',
-    musicUrlData: '',
-    lyricsData: '',
-    musicDetailsData: '',
+    // musicName: '',
+    musicUrlData: '', // 音乐mp3数据
+    lyricsData: '', // 歌词数据
+    musicDetailsData: '', // 歌曲详细数据
     // src: '',
     isPlayOrPause: false, // 播放，点击暂停
     musicLength: 0, // 音乐时间长度
@@ -24,7 +24,27 @@ Page({
     lyricsActiceIndex: 0, // 歌词单行选中
     currentTime: '00:00', // 当前歌曲时间
     totalTime: '00:00', // 总的音乐时长
-    playerDisc: false,
+    playerDisc: false, // 歌曲播放，顶部图片状态
+    commentsNum: 0, // 评论条数
+  },
+  // 测试
+  testChange(e) {
+    console.log(e.detail.current);
+    this.getMusicIdPerform(this.data.playListData[e.detail.current].id)
+  },
+  // 处理评论条数
+  formatCommentsNum(value) {
+    let number = value.toString()
+    let len = '1' + '0'.repeat(number.length - 1)
+    if (number.length < 4) {
+      return number
+    } else if (number.length >= 4 && number.length < 5) {
+      return '999+'
+    } else if (number.length >= 5 && number.length < 9) {
+      return parseInt(len / 10000) + 'w+';
+    } else if (number.length >= 9) {
+      return parseInt(len / 10000000) + 'kw+'
+    }
   },
   // 歌词与播放器页面的切换
   clickSwitch() {
@@ -47,7 +67,7 @@ Page({
     if (this.data.isPlayOrPause) {
       backgroundAudioManager.pause()
     } else {
-      backgroundAudioManager.play()  
+      backgroundAudioManager.play()
     }
     this.setData({
       isPlayOrPause: !this.data.isPlayOrPause,
@@ -69,8 +89,18 @@ Page({
     } = await request('/song/url', {
       id: musicId
     })
-    console.log(musicUrl);
-
+    // 获取歌曲的评论数据
+    const {
+      total: commentsNum
+    } = await request('/comment/music', {
+      id: musicId
+    })
+    this.setData({
+      musicUrlData: musicUrl,
+      musicDetailsData: musicDetails,
+      totalTime: tools.formatMillisecond(musicDetails.dt),
+      commentsNum: this.formatCommentsNum(commentsNum)
+    })
     // 歌词
     const {
       lrc: lyrics
@@ -78,7 +108,6 @@ Page({
       id: musicId
     })
     console.log(lyrics);
-
     if (lyrics) {
       // 处理歌词
       let lyricsResult = lyrics.lyric.split("\n").map(r => {
@@ -96,11 +125,7 @@ Page({
         lyricsActiceIndex: 0
       })
     }
-    this.setData({
-      musicUrlData: musicUrl,
-      musicDetailsData: musicDetails,
-      totalTime: tools.formatMillisecond(musicDetails.dt)
-    })
+
     // 顶部标题
     wx.setNavigationBarTitle({
       title: musicDetails.name
@@ -125,7 +150,10 @@ Page({
   },
   onPrev() {
     console.log(this.data.listIdIndex);
+    backgroundAudioManager.stop()
     this.setData({
+      playerDisc: false,
+      isPlayOrPause: false,
       listIdIndex: this.data.listIdIndex - 1
     })
     console.log(this.data.listIdIndex);
@@ -138,11 +166,13 @@ Page({
   },
   onNext() {
     console.log(typeof this.data.listIdIndex);
-
+    backgroundAudioManager.stop()
     console.log(this.data.listIdIndex);
     console.log(this.data.playListData);
 
     this.setData({
+      playerDisc: false,
+      isPlayOrPause: false,
       listIdIndex: this.data.listIdIndex + 1
     })
     console.log(typeof this.data.listIdIndex);
@@ -163,10 +193,10 @@ Page({
    */
   onLoad: async function (options) {
     console.log(options);
-    options = {
-      index: "0",
-      musicId: "1426649237"
-    }
+    // options = {
+    //   index: "0",
+    //   musicId: "1426649237"
+    // }
     const systemData = tools.deviceInformation()
     let height = systemData.windowHeight * (750 / systemData.windowWidth);
     this.setData({

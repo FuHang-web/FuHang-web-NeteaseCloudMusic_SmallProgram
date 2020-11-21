@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/playDetails/playDetails",
     "pages/index/index",
+    "pages/playDetails/playDetails",
     "pages/video/video",
     "pages/mine/mine"
   ],

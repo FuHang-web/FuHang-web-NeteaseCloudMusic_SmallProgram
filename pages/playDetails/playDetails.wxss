@@ -54,13 +54,31 @@
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox {
-  width: 592rpx;
+  /* width: 592rpx; */
+  width: 100%;
   height: 592rpx;
-  background-color: rgba(0, 0, 0, .1);
-  border-radius: 50%;
+  /* background-color: rgba(0, 0, 0, .1);
+  border-radius: 50%; */
   position: relative;
 }
-.playerMenu{
+
+.ringBox .bottomBgColor {
+  position: absolute;
+  width: 592rpx;
+  height: 592rpx;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.ringBox .swiperBox {
+  height: 100%;
+  width: 100%;
+}
+
+.playerMenu {
   /* justify-content: flex-end; */
   position: absolute;
   bottom: 20rpx;
@@ -70,28 +88,32 @@
   padding: 0 50rpx;
   box-sizing: border-box;
 }
-.playerMenu .iconfontBox{
+
+.playerMenu .iconfontBox {
   flex: 1;
   text-align: center;
 }
-.playerMenu .iconfont{
+
+.playerMenu .iconfont {
   font-size: 44rpx;
   color: #fff;
   position: relative;
 }
-.playerMenu .iconfont .comments{
+
+.playerMenu .iconfont .comments {
   font-size: 18rpx;
   position: absolute;
   top: -2rpx;
   left: 36rpx;
 }
+
 .lyricBgBox .lyrics .bgImage .ringBox::after {
   content: "";
   position: absolute;
   width: 192rpx;
   height: 274rpx;
   top: -140rpx;
-  left: 266rpx;
+  left: 50%;
   /* transform: rotate(-20deg); */
   background: url('https://s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=') no-repeat center;
   background-size: contain;
@@ -99,13 +121,17 @@
   transform-origin: 24rpx 10rpx;
   transition: transform .5s ease;
 }
-.lyricBgBox .lyrics .bgImage .play.ringBox::after{
+
+.lyricBgBox .lyrics .bgImage .play.ringBox::after {
   transform: rotate(0deg);
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox .playerBox {
   width: 100%;
   height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox .playerBox::before {
@@ -116,17 +142,53 @@
   width: 100%;
   height: 100%;
   background-image: url('https://p5.music.126.net/obj/wo3DlcOGw6DClTvDisK1/4602256867/5855/63fb/325b/d7e4e3a244701ee85fecb5d4f6b5bd57.png?imageView=&quality=75&thumbnail=200y200');
+  background-repeat: no-repeat;
+  background-position: center;
   background-size: contain;
 }
 
-.lyricBgBox .lyrics .bgImage .ringBox image {
-  width: 368rpx;
-  height: 368rpx;
-  position: absolute;
-  top: 50%;
+.lyricBgBox .lyrics .bgImage .ringBox .imageSpin {
+  width: 372rpx;
+  height: 372rpx;
+  /* position: absolute;
+  top: 110rpx;
+  left: 110rpx; */
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   border-radius: 50%;
+}
+
+.rotation {
+  animation: rotation 20s linear infinite;
+}
+
+.restart {
+  animation: rotation1 1ms linear;
+}
+
+.rotation-paused {
+  animation-play-state: paused;
+}
+
+@keyframes rotation1 {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 /* 歌词单行选中 */
@@ -170,10 +232,12 @@
   padding: 0 50rpx;
   box-sizing: border-box;
 }
-.controlButton .iconfontBox{
+
+.controlButton .iconfontBox {
   flex: 1;
   text-align: center;
 }
+
 .controlButton .iconfont {
   color: #eee;
 }

@@ -5,17 +5,18 @@ var filter = {
     var k = 10000,
       sizes = ['', '万', '亿', '万亿'],
       i;
+    // if (value < 100000) {
+    //   return {
+    //     value: value,
+    //     unit: ''
+    //   }
+    // }
     if (value < 100000) {
-      return {
-        value: value,
-        unit: ''
-      }
-    }
-    if (value < k) {
       param.value = value
       param.unit = ''
     } else {
       i = Math.floor(Math.log(value) / Math.log(k));
+      console.log(i);
       param.value = ((value / Math.pow(k, i))).toFixed(2);
       param.unit = sizes[i];
     }
@@ -40,10 +41,25 @@ var filter = {
     } else {
       return years + '-' + months + '-' + days
     }
-  }
+  },
+  // 格式化评论条数
+  formatCommentsNum: function (value) {
+    var number = value.toString()
+    var len = '1' + '0'.repeat(number.length - 1)
+    if (number.length < 4) {
+      return number
+    } else if (number.length >= 4 && number.length < 5) {
+      return '999+'
+    } else if (number.length >= 5 && number.length < 9) {
+      return parseInt(len / 10000) + 'w+';
+    } else if (number.length >= 9) {
+      return parseInt(len / 10000000) + 'kw+'
+    }
+  },
 }
 
 module.exports = {
   numberFormat: filter.numberFormat,
-  formatToDate: filter.formatToDate
+  formatToDate: filter.formatToDate,
+  formatCommentsNum: filter.formatCommentsNum
 }
