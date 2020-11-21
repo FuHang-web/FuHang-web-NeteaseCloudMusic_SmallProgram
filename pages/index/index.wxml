@@ -62,7 +62,7 @@
 	</view>
 
 	<!-- 音乐日历 -->
-	<view class="musicCalendar">
+	<view class="musicCalendar" wx:if="{{musicCalendarList.length}}">
 		<text class="iconfont icon-yinlerili">专辑预告</text>
 		<view class="musicCalendarListBox test1" wx:for="{{musicCalendarList}}" wx:key="id" wx:for-item="musicCalendarItem">
 			<view class="musicCalendarListBox-left">

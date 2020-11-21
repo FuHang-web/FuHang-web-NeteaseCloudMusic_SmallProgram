@@ -5,8 +5,10 @@
   display: flex;
   flex-direction: column;
   position: relative;
+  overflow: hidden;
 }
-.playDetailsBox .playDetailsBoxBgImage{
+
+.playDetailsBox .playDetailsBoxBgImage {
   position: absolute;
   top: 0;
   left: 0;
@@ -15,8 +17,9 @@
   filter: blur(22px);
   z-index: -1;
   transform: scale(1.2);
-  overflow: hidden;
+  /* overflow: hidden; */
 }
+
 /* 歌词背景 */
 .lyricBgBox {
   flex: 1;
@@ -47,6 +50,7 @@
   align-items: center;
   justify-content: center;
   height: 100%;
+  position: relative;
 }
 
 .lyricBgBox .lyrics .bgImage .ringBox {
@@ -56,8 +60,55 @@
   border-radius: 50%;
   position: relative;
 }
-
+.playerMenu{
+  /* justify-content: flex-end; */
+  position: absolute;
+  bottom: 20rpx;
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0 50rpx;
+  box-sizing: border-box;
+}
+.playerMenu .iconfontBox{
+  flex: 1;
+  text-align: center;
+}
+.playerMenu .iconfont{
+  font-size: 44rpx;
+  color: #fff;
+  position: relative;
+}
+.playerMenu .iconfont .comments{
+  font-size: 18rpx;
+  position: absolute;
+  top: -2rpx;
+  left: 36rpx;
+}
 .lyricBgBox .lyrics .bgImage .ringBox::after {
+  content: "";
+  position: absolute;
+  width: 192rpx;
+  height: 274rpx;
+  top: -140rpx;
+  left: 266rpx;
+  /* transform: rotate(-20deg); */
+  background: url('https://s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=') no-repeat center;
+  background-size: contain;
+  transform: rotate(-30deg);
+  transform-origin: 24rpx 10rpx;
+  transition: transform .5s ease;
+}
+.lyricBgBox .lyrics .bgImage .play.ringBox::after{
+  transform: rotate(0deg);
+}
+
+.lyricBgBox .lyrics .bgImage .ringBox .playerBox {
+  width: 100%;
+  height: 100%;
+}
+
+.lyricBgBox .lyrics .bgImage .ringBox .playerBox::before {
   content: "";
   position: absolute;
   left: 0;
@@ -114,10 +165,15 @@
 
 .controlButton {
   display: flex;
-  justify-content: space-around;
+  /* justify-content: space-around; */
   align-items: center;
+  padding: 0 50rpx;
+  box-sizing: border-box;
 }
-
+.controlButton .iconfontBox{
+  flex: 1;
+  text-align: center;
+}
 .controlButton .iconfont {
   color: #eee;
 }
@@ -133,5 +189,5 @@
 .icon-shangyiqu,
 .icon-xiayiqu,
 .icon-caidan {
-  font-size: 48rpx;
+  font-size: 44rpx;
 }

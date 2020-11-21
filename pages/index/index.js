@@ -135,10 +135,14 @@ Page({
           startTime: tools.getTimeStamp(),
           endTime: tools.getTimeStamp() + 86400 * 6 * 1000
         })
-        console.log(musicCalendarListData.calendarEvents);
-        this.setData({
-          musicCalendarList: musicCalendarListData.calendarEvents.slice(0, 1)
-        })
+        console.log(musicCalendarListData);
+        if (musicCalendarListData) {
+          console.log(musicCalendarListData.calendarEvents);
+          this.setData({
+            musicCalendarList: musicCalendarListData.calendarEvents.slice(0, 1)
+          })
+        }
+
         console.log(tools.getTimeStamp());
         console.log(tools.getTimeStamp());
 

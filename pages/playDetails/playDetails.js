@@ -8,14 +8,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-    test: false,
-    musicId: '',
+    switch: false,  // 歌词与播放器页面的切换
+    // musicId: '',
     musicName: '',
     musicUrlData: '',
     lyricsData: '',
     musicDetailsData: '',
-    src: '',
-    isPlayOrPause: 0, // 播放，点击暂停
+    // src: '',
+    isPlayOrPause: false, // 播放，点击暂停
     musicLength: 0, // 音乐时间长度
     listIdIndex: 0, // 歌单列表当前歌曲的下标
     playListData: [], // 当前歌单所有音乐
@@ -24,13 +24,15 @@ Page({
     lyricsActiceIndex: 0, // 歌词单行选中
     currentTime: '00:00', // 当前歌曲时间
     totalTime: '00:00', // 总的音乐时长
+    playerDisc: false,
   },
-  clickTest() {
-    console.log(this.data.test);
-    console.log(!this.data.test);
+  // 歌词与播放器页面的切换
+  clickSwitch() {
+    console.log(this.data.switch);
+    console.log(!this.data.switch);
     const _self = this
     this.setData({
-      test: !_self.data.test
+      switch: !_self.data.switch
     })
   },
   // 进度条
@@ -42,17 +44,15 @@ Page({
   // 
   clickPlayOrPause(e) {
     console.log(e);
-    if (this.data.isPlayOrPause === 0) {
-      backgroundAudioManager.play()
-      this.setData({
-        isPlayOrPause: 1
-      })
-    } else {
+    if (this.data.isPlayOrPause) {
       backgroundAudioManager.pause()
-      this.setData({
-        isPlayOrPause: 0
-      })
+    } else {
+      backgroundAudioManager.play()  
     }
+    this.setData({
+      isPlayOrPause: !this.data.isPlayOrPause,
+      playerDisc: !this.data.playerDisc,
+    })
   },
   // 获取到音乐ID之后执行
   async getMusicIdPerform(musicId) {
@@ -163,6 +163,10 @@ Page({
    */
   onLoad: async function (options) {
     console.log(options);
+    options = {
+      index: "0",
+      musicId: "1426649237"
+    }
     const systemData = tools.deviceInformation()
     let height = systemData.windowHeight * (750 / systemData.windowWidth);
     this.setData({
@@ -195,7 +199,8 @@ Page({
     backgroundAudioManager.onCanplay(() => {
       console.log('开始');
       this.setData({
-        isPlayOrPause: 1
+        isPlayOrPause: true,
+        playerDisc: true
       })
       setTimeout(() => {
         this.setData({
@@ -207,7 +212,7 @@ Page({
     // 
     backgroundAudioManager.onPause(() => {
       this.setData({
-        isPlayOrPause: 0
+        isPlayOrPause: false,
       })
     })
     // 
