@@ -2,6 +2,7 @@
 import request from '../../utils/request'
 import tools from '../../utils/tools'
 const backgroundAudioManager = wx.getBackgroundAudioManager()
+const appInstance = getApp()
 Page({
 
   /**
@@ -73,6 +74,7 @@ Page({
       isPlayOrPause: !this.data.isPlayOrPause,
       playerDisc: !this.data.playerDisc,
     })
+    appInstance.globalData.isMusicPlay = this.data.isPlayOrPause
   },
   // 获取到音乐ID之后执行
   async getMusicIdPerform(musicId) {
@@ -98,6 +100,7 @@ Page({
     this.setData({
       musicUrlData: musicUrl,
       musicDetailsData: musicDetails,
+      isPlayOrPause: true,
       totalTime: tools.formatMillisecond(musicDetails.dt),
       commentsNum: this.formatCommentsNum(commentsNum)
     })
@@ -169,7 +172,6 @@ Page({
     backgroundAudioManager.stop()
     console.log(this.data.listIdIndex);
     console.log(this.data.playListData);
-
     this.setData({
       playerDisc: false,
       isPlayOrPause: false,
@@ -208,12 +210,17 @@ Page({
       let rankingList = wx.getStorageSync('rankingList')
       if (rankingList) {
         console.log(typeof options.index);
-
         this.setData({
           playListData: rankingList,
           listIdIndex: parseInt(options.index)
         })
-        this.getMusicIdPerform(options.musicId)
+        if (appInstance.globalData.isMusicPlay && appInstance.globalData.musicId === this.data.playListData[this.data.listIdIndex].id) {
+          this.setData({
+            isPlayOrPause: true
+          })
+        } else {
+          this.getMusicIdPerform(options.musicId)
+        }
       }
     } catch (e) {
       console.log(e);
@@ -228,6 +235,7 @@ Page({
     // 监听背景音频进入可播放状态事件。 但不保证后面可以流畅播放
     backgroundAudioManager.onCanplay(() => {
       console.log('开始');
+      appInstance.globalData.musicId = this.data.playListData[this.data.listIdIndex].id
       this.setData({
         isPlayOrPause: true,
         playerDisc: true
