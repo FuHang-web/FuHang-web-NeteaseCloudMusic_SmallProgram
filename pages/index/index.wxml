@@ -7,7 +7,7 @@
 				<text class="iconfont icon-sousuo"></text>
 				<text>大家都在搜 午睡</text>
 			</view>
-			<view class="topHeader-song">
+			<view class="topHeader-song" catchtap="xiangqing">
 				<view class='progress_box'>
 					<canvas class="progress_bg" canvas-id="canvasProgressbg"></canvas>
 					<view class="progress_text">

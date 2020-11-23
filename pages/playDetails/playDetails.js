@@ -209,10 +209,10 @@ Page({
       // 获取存储在storage中的榜单详情
       let rankingList = wx.getStorageSync('rankingList')
       if (rankingList) {
-        console.log(typeof options.index);
+        // console.log(typeof options.index);
         this.setData({
           playListData: rankingList,
-          listIdIndex: parseInt(options.index)
+          listIdIndex: parseInt(options.index) || 1
         })
         if (appInstance.globalData.isMusicPlay && appInstance.globalData.musicId === this.data.playListData[this.data.listIdIndex].id) {
           this.setData({

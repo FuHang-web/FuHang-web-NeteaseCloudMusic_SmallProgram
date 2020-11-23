@@ -1,6 +1,7 @@
 // pages/index/index.js
 import request from '../../utils/request'
 import tools from '../../utils/tools'
+const appInstance = getApp()
 Page({
 
   /**
@@ -16,7 +17,12 @@ Page({
     musicCalendarList: [], // 音乐日历数据
     progress_txt1: '00'
   },
-
+  xiangqing(e){
+    console.log(appInstance.globalData.musicId);
+    wx.navigateTo({
+      url: `/pages/playDetails/playDetails?musicId=${appInstance.globalData.musicId}`,
+    })
+  },
   test(e) {
     console.log(e);
   },
