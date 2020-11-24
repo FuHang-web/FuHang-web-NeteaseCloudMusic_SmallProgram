@@ -113,7 +113,7 @@
   width: 192rpx;
   height: 274rpx;
   top: -140rpx;
-  left: 50%;
+  left: 46%;
   /* transform: rotate(-20deg); */
   background: url('https://s3.music.126.net/mobile-new/img/needle-ip6.png?be4ebbeb6befadfcae75ce174e7db862=') no-repeat center;
   background-size: contain;
